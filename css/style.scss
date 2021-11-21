@@ -1,0 +1,736 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+// variable
+$pink: #fa1d86;
+$blue: #224bcf;
+$black: #302851;
+$white: #fff;
+$light-pink: #ffeaf4;
+$light-blue: #e9edfb;
+$light-color: #666;
+$light-bg: #f5f5f5;
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+  background: $light-blue;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $black;
+  border-radius: 0.5rem;
+}
+
+// Mixin
+@mixin grid($val) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($val, 1fr));
+  gap: 1.5rem;
+}
+
+@mixin forIcon($bg, $color) {
+  width: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: $bg;
+  color: $color;
+  z-index: 10;
+}
+
+// Placeholder Selector
+%flex {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+%flexBtween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%paragraph {
+  color: $light-color;
+  line-height: 1.8;
+  font-size: 0.9rem;
+  padding: 0.5rem 0 0;
+}
+
+%boxing {
+  background: $light-bg;
+  padding: 18px;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+// global
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+section {
+  padding: 2rem 9%;
+  @media (max-width: 991px) {
+    padding: 1rem 1.5rem;
+  }
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background: #e9edfb;
+  color: #224bcf;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.5s;
+  &:hover {
+    background: $blue;
+    color: $white;
+  }
+}
+
+// Start Header
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 9%;
+  background-color: $blue;
+  @extend %flexBtween;
+
+  .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: $white;
+    i {
+      color: $pink;
+    }
+  }
+
+  .bars {
+    font-size: 1.6rem;
+    color: $white;
+    cursor: pointer;
+    display: none;
+
+    .fa-times {
+      transform: rotate(90deg);
+    }
+    @media (max-width: 991px) {
+      display: block;
+    }
+  }
+
+  .navbar {
+    ul {
+      display: flex;
+      li {
+        position: relative;
+
+        &:hover ul {
+          display: block;
+        }
+        a {
+          display: block;
+          color: $white;
+          padding: 1.5rem;
+          font-size: 1.1rem;
+          &:hover {
+            background-color: $pink;
+          }
+        }
+
+        ul {
+          position: absolute;
+          left: 0;
+          width: 10rem;
+          display: flex;
+          flex-direction: column;
+          background-color: $blue;
+          display: none;
+          a {
+            padding: 1rem 1.5rem;
+          }
+        }
+      }
+    }
+    @media (max-width: 991px) {
+      position: absolute;
+      top: 98%;
+      left: 0;
+      width: 100%;
+      background-color: $blue;
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      &.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+      ul {
+        flex-direction: column;
+        li {
+          a {
+            padding: 1rem 1.5rem;
+          }
+          ul {
+            position: relative;
+            width: 100%;
+            padding: 0 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    padding: 1rem 1.5rem;
+  }
+}
+
+// Start Home Page
+.home {
+  @extend %flex;
+  .home_img {
+    flex: 1;
+    img {
+      max-width: 100%;
+    }
+  }
+  .home_content {
+    flex: 1;
+    h2 {
+      font-size: 2.5rem;
+      color: $black;
+    }
+    p {
+      @extend %paragraph;
+    }
+
+    @media (max-width: 767px) {
+      flex-basis: 100%;
+    }
+  }
+}
+
+.category {
+  @include grid(10rem);
+  .category_box {
+    @extend %boxing;
+
+    img {
+      height: 4rem;
+      max-width: 100%;
+    }
+    a {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      color: $black;
+      &:hover {
+        color: $pink;
+      }
+    }
+  }
+}
+// End Home Page
+
+// Start Heading For All Pages
+.heading {
+  background: url("../media/images/heading-bg.png") no-repeat center;
+  background-size: cover;
+
+  h2 {
+    font-size: 2rem;
+    color: $black;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    color: $light-color;
+    a {
+      display: inline-block;
+      width: 5rem;
+      color: $pink;
+      padding-right: 0.3rem;
+      transition: 0.4s;
+
+      &:hover {
+        color: $blue;
+        font-weight: 600;
+      }
+    }
+  }
+}
+// End Heading For All Pages
+
+// Start About Page
+.about {
+  @extend %flex;
+
+  .about_img {
+    flex: 1;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .about_content {
+    flex: 1;
+    h2 {
+      font-size: 2.5rem;
+      color: $black;
+
+      @media (max-width: 767px) {
+        font-size: 2rem;
+      }
+    }
+    p {
+      @extend %paragraph;
+    }
+
+    @media (max-width: 767px) {
+      flex-basis: 100%;
+    }
+  }
+}
+// End About Page
+
+// Start Course_01 Page
+.course_01 {
+  @include grid(16rem);
+  .box {
+    @extend %boxing;
+    img {
+      height: 4rem;
+      max-width: 100%;
+    }
+    h3 {
+      color: $black;
+      margin: 0.5rem 0;
+    }
+    p {
+      color: $light-color;
+      font-size: 0.9rem;
+      line-height: 1.9;
+    }
+  }
+}
+// End Course_01 Page
+
+// Start Course_02 Page
+.course_02 {
+  @include grid(16rem);
+  .box {
+    @extend %boxing;
+    text-align: left;
+    .image {
+      text-align: center;
+      margin-bottom: 1rem;
+
+      img {
+        height: 12rem;
+        max-width: 100%;
+      }
+    }
+    span {
+      display: block;
+      color: $pink;
+      background: $light-pink;
+      padding: 0.5rem;
+      width: fit-content;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: $black;
+    }
+    p {
+      @extend %paragraph;
+    }
+
+    .icons {
+      @extend %flexBtween;
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+
+      a {
+        color: $light-color;
+        font-size: 0.9rem;
+        i {
+          color: $pink;
+          margin-right: 0.3rem;
+        }
+        &:hover {
+          color: $pink;
+        }
+      }
+    }
+  }
+}
+// End Course_02 Page
+
+// Start Course_03 Page
+.course_03 {
+  @include grid(16rem);
+  .box {
+    .box_video {
+      position: relative;
+      width: 100%;
+      height: 15rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        @include forIcon(#fff, $black);
+      }
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1) rotate(3deg);
+        }
+      }
+    }
+    .box_content {
+      text-align: center;
+      h3 {
+        color: $black;
+        margin-top: 0.5rem;
+        font-weight: 600;
+      }
+      p {
+        color: $light-color;
+      }
+    }
+  }
+}
+
+.video_popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #close_vid {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+  }
+  video {
+    width: 80%;
+    border: 0.3rem solid #fff;
+    border-radius: 0.5rem;
+
+    @media (max-width: 767px) {
+      width: 90%;
+    }
+  }
+  display: none;
+  animation: fade_popup 0.6s;
+}
+
+.video_popup.active {
+  display: flex;
+}
+
+@keyframes fade_popup {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+// End Course_03 Page
+
+// Start Teachers Page
+.teachers {
+  @include grid(16rem);
+  .box {
+    &:hover .image {
+      .share {
+        height: 100%;
+
+        a {
+          transform: translateY(0);
+          opacity: 1;
+          transition: 0.3s;
+          transition-delay: 0.3s;
+        }
+      }
+    }
+    .image {
+      width: 100%;
+      height: 20rem;
+      position: relative;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .share {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background: rgba($color: #000000, $alpha: 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        z-index: 10;
+        transition: 0.4s;
+
+        a {
+          font-size: 1.5rem;
+          color: #fff;
+          margin: 0.6rem 0.8rem;
+          transform: translateY(5rem);
+          opacity: 0;
+        }
+      }
+    }
+    .info {
+      text-align: center;
+      h3 {
+        color: $black;
+        margin-top: 0.8rem;
+        font-weight: 600;
+      }
+      span {
+        color: $light-color;
+      }
+    }
+  }
+}
+// End Teachers Page
+
+// Start Blog Page
+.blog {
+  @include grid(16rem);
+  .box {
+    background: $light-bg;
+    border-radius: 0.5rem;
+
+    .image {
+      width: 100%;
+      img {
+        width: 100%;
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+    }
+    .info {
+      padding: 18px;
+      .desc {
+        @extend %flexBtween;
+
+        i {
+          color: $blue;
+          margin-right: 0.3rem;
+        }
+        h4,
+        a {
+          color: $light-color;
+          font-size: 0.9rem;
+          font-weight: normal;
+        }
+        a:hover {
+          color: $blue;
+        }
+      }
+      h2 {
+        color: $black;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0.8rem 0 0.5rem;
+      }
+      p {
+        @extend %paragraph;
+      }
+    }
+  }
+}
+// End Blog Page
+
+// Start Contact Page
+.contact {
+  .icons_content {
+    @include grid(16rem);
+    .box {
+      @extend %boxing;
+      i {
+        @include forIcon($light-blue, $blue);
+      }
+      h3 {
+        color: $black;
+        margin: 0.5rem 0;
+        font-weight: 600;
+      }
+      p {
+        color: $light-color;
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+    }
+  }
+  .contact_form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    form {
+      flex: 1;
+      background: $light-bg;
+      padding: 20px;
+      border-radius: 0.5rem;
+
+      h3 {
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: $black;
+        margin-bottom: 0.7rem;
+      }
+
+      input.box,
+      textarea {
+        display: block;
+        width: 100%;
+        height: 45px;
+        padding: 10px;
+        border: none;
+        border-radius: 0.5rem;
+        outline: none;
+        margin-bottom: 0.7rem;
+        font-size: 1rem;
+      }
+      textarea {
+        resize: none;
+        height: 8rem;
+        margin-bottom: 0;
+      }
+      .btn {
+        border: none;
+        padding: 0.7rem 1.2rem;
+      }
+      @media (max-width: 767px) {
+        flex-basis: 100%;
+      }
+    }
+    .map {
+      flex: 1;
+      border: none;
+      border-radius: 0.5rem;
+    }
+  }
+}
+// End Contact Page
+
+// Start Footer
+.footer {
+  padding: 2rem 9% 1rem;
+  background-color: $light-bg;
+
+  .footer_content {
+    @include grid(15rem);
+  }
+
+  .footer_box {
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      color: $black;
+    }
+    a {
+      display: block;
+      color: $light-color;
+
+      &:not(:last-child) {
+        margin-bottom: 0.8rem;
+      }
+
+      i {
+        margin-right: 0.5rem;
+        color: $pink;
+      }
+
+      &:hover {
+        color: $pink;
+        padding-left: 0.5rem;
+      }
+    }
+    &:not(:last-child) {
+      a {
+        &::before {
+          content: "\f061";
+          font-family: "Font Awesome 5 free";
+          font-weight: 900;
+          color: $pink;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+  .copyright {
+    text-align: center;
+    color: $light-color;
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+    padding-top: 1rem;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+
+    span {
+      color: $pink;
+    }
+  }
+}
+// End Footer
